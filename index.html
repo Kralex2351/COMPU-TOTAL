@@ -1,154 +1,539 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tienda de tecnología - Procesadores, teclados, cámaras CCTV, DVR, almacenamiento y más" />
-  <title>TechStore</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Tienda de tecnología — Procesadores, teclados, cámaras CCTV, DVR, almacenamiento y más"/>
+<title>TechStore</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23E8000D'/><text x='16' y='23' text-anchor='middle' font-family='Arial Black' font-size='20' fill='white'>T</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;800&display=swap"/>
+<style>
+/* ============================================================
+   TECHSTORE — ESTILOS  |  Rojo · Negro · Blanco
+   ============================================================ */
+:root{
+  --rojo:#E8000D;--rojo-dark:#B0000A;--rojo-glow:rgba(232,0,13,.35);
+  --negro:#070707;--n2:#111;--n3:#1a1a1a;--n4:#222;--n5:#2d2d2d;
+  --blanco:#fff;--b2:#f5f5f5;--gris:#888;--gris2:#555;
+  --verde:#00cc66;--amarillo:#ffb800;
+  --fd:'Rajdhani',sans-serif;--fb:'Exo 2',sans-serif;
+  --r:6px;--rl:12px;
+  --sh:0 4px 20px rgba(0,0,0,.6);
+  --shr:0 4px 24px rgba(232,0,13,.3);
+  --tr:.25s cubic-bezier(.4,0,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--negro);color:var(--blanco);min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--n2)}
+::-webkit-scrollbar-thumb{background:var(--rojo);border-radius:3px}
 
-  <!-- Favicon inline (cuadrado rojo con T) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23E8000D'/><text x='16' y='23' text-anchor='middle' font-family='Arial Black' font-size='20' fill='white'>T</text></svg>" />
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:var(--n2);border-bottom:2px solid var(--rojo);box-shadow:0 2px 30px rgba(232,0,13,.2)}
+.h-inner{max-width:1400px;margin:0 auto;padding:0 20px;height:70px;display:flex;align-items:center;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+#store-logo{height:46px;width:auto;object-fit:contain;display:none}
+#logo-text{width:46px;height:46px;background:var(--rojo);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:700;font-size:22px;color:#fff;flex-shrink:0}
+.logo-info{display:flex;flex-direction:column}
+#store-name{font-family:var(--fd);font-size:22px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase;line-height:1}
+#store-slogan{font-size:10px;color:var(--rojo);letter-spacing:1px;text-transform:uppercase}
+.h-search{flex:1;max-width:480px;position:relative}
+#buscador{width:100%;padding:10px 16px 10px 42px;background:var(--n3);border:1px solid var(--n5);border-radius:var(--r);color:#fff;font-family:var(--fb);font-size:14px;transition:var(--tr);outline:none}
+#buscador:focus{border-color:var(--rojo);box-shadow:0 0 0 3px var(--rojo-glow);background:var(--n4)}
+#buscador::placeholder{color:var(--gris)}
+.s-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--gris);pointer-events:none;font-size:15px}
+.h-wa{display:flex;align-items:center;gap:7px;padding:10px 18px;background:#25d366;color:#fff;text-decoration:none;border-radius:var(--r);font-family:var(--fd);font-weight:600;font-size:14px;letter-spacing:.5px;transition:var(--tr);white-space:nowrap;flex-shrink:0}
+.h-wa:hover{background:#1ebe59;transform:translateY(-1px)}
+.h-wa svg{flex-shrink:0}
 
-  <link rel="stylesheet" href="css/styles.css" />
+/* STATS */
+#stats-bar{background:var(--n3);border-bottom:1px solid var(--n5);padding:7px 20px;display:flex;gap:24px;justify-content:center;font-size:12px;color:var(--gris);letter-spacing:.5px;flex-wrap:wrap}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--n2) 0%,var(--negro) 50%,#1a0000 100%);padding:56px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(232,0,13,.03) 30px,rgba(232,0,13,.03) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(232,0,13,.03) 30px,rgba(232,0,13,.03) 31px);pointer-events:none}
+.hero-c{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.hero h1{font-family:var(--fd);font-size:clamp(36px,6vw,70px);font-weight:700;text-transform:uppercase;letter-spacing:4px;line-height:1}
+.hero h1 span{color:var(--rojo)}
+.hero p{margin-top:14px;color:var(--gris);font-size:15px;letter-spacing:1px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.hero-tag{padding:5px 13px;border:1px solid var(--n5);border-radius:100px;font-size:12px;color:var(--gris)}
+
+/* MAIN */
+.main-wrap{max-width:1400px;margin:0 auto;padding:32px 20px}
+
+/* PROMOCIONES */
+#promo-section{background:linear-gradient(135deg,#1a0000 0%,var(--n3) 100%);border:1px solid var(--rojo);border-radius:var(--rl);padding:30px;margin-bottom:44px;position:relative;overflow:hidden}
+#promo-section::before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(232,0,13,.07) 0%,transparent 70%);pointer-events:none}
+.promo-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-bottom:26px;position:relative;z-index:1}
+#promo-titulo{font-family:var(--fd);font-size:26px;font-weight:700;color:var(--rojo);text-transform:uppercase;letter-spacing:2px}
+#promo-sub{color:var(--gris);font-size:13px;margin-top:4px}
+#countdown{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.cd-lbl{font-size:11px;color:var(--gris);letter-spacing:1px;text-transform:uppercase;margin-right:3px}
+.cd-blk{display:flex;flex-direction:column;align-items:center;background:var(--n4);border:1px solid var(--rojo);border-radius:var(--r);padding:7px 11px;min-width:52px}
+.cd-num{font-family:var(--fd);font-size:26px;font-weight:700;color:var(--rojo);line-height:1}
+.cd-u{font-size:9px;color:var(--gris);letter-spacing:1px;text-transform:uppercase}
+.cd-sep{font-size:26px;color:var(--rojo);font-weight:700;margin-top:-4px}
+#promo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;position:relative;z-index:1}
+
+/* CATEGORÍAS NAV */
+#cat-nav{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:30px;padding:18px;background:var(--n2);border-radius:var(--rl);border:1px solid var(--n5)}
+.cat-btn{display:flex;align-items:center;gap:6px;padding:7px 15px;background:var(--n3);border:1px solid var(--n5);border-radius:var(--r);color:var(--gris);font-family:var(--fb);font-size:13px;cursor:pointer;transition:var(--tr);white-space:nowrap}
+.cat-btn:hover{border-color:var(--rojo);color:#fff;background:var(--n4)}
+.cat-btn.active{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:600;box-shadow:var(--shr)}
+.cat-cnt{background:rgba(255,255,255,.15);border-radius:100px;padding:1px 7px;font-size:11px}
+
+/* SECCIONES */
+.cat-sec{margin-bottom:52px;animation:fadeIn .35s ease}
+.cat-hdr{margin-bottom:18px}
+.cat-title{font-family:var(--fd);font-size:21px;font-weight:700;text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:9px;padding-bottom:11px}
+.cat-total{font-size:12px;color:var(--gris);font-weight:400;letter-spacing:.5px;text-transform:none;margin-left:4px}
+.cat-line{height:2px;background:linear-gradient(90deg,var(--rojo),transparent);border-radius:1px}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:18px}
+
+/* CARD */
+.prod-card{background:var(--n2);border:1px solid var(--n5);border-radius:var(--rl);overflow:hidden;position:relative;transition:var(--tr);display:flex;flex-direction:column}
+.prod-card:hover{border-color:var(--rojo);transform:translateY(-4px);box-shadow:0 8px 32px rgba(232,0,13,.2)}
+.prod-card.agotado{opacity:.55}
+.prod-card.agotado:hover{transform:none}
+.prod-card.promo{border-color:var(--rojo);background:linear-gradient(160deg,#1a0000 0%,var(--n2) 100%)}
+.badge-desc,.badge-promo{position:absolute;top:9px;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 9px;border-radius:100px;z-index:2;text-transform:uppercase}
+.badge-desc{right:9px;background:var(--rojo);color:#fff}
+.badge-promo{left:9px;background:var(--amarillo);color:var(--negro)}
+.img-wrap{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--n3)}
+.prod-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.prod-card:hover .prod-img{transform:scale(1.06)}
+.prod-info{padding:15px;display:flex;flex-direction:column;gap:7px;flex:1}
+.prod-nombre{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.5px;line-height:1.3;color:#fff}
+.prod-desc{font-size:12px;color:var(--gris);line-height:1.5;flex:1}
+.prod-precios{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.p-orig{font-size:13px;color:var(--gris2);text-decoration:line-through}
+.p-act{font-family:var(--fd);font-size:21px;font-weight:700;color:var(--rojo)}
+.stock{font-size:11px;font-weight:600;letter-spacing:.5px;padding:3px 9px;border-radius:var(--r);display:inline-flex;align-items:center;gap:4px;align-self:flex-start}
+.stock.ok{background:rgba(0,204,102,.1);color:var(--verde)}
+.stock.low{background:rgba(255,184,0,.1);color:var(--amarillo)}
+.stock.out{background:rgba(136,136,136,.1);color:var(--gris)}
+.btn-buy{margin-top:auto;padding:11px 18px;background:var(--rojo);color:#fff;border:none;border-radius:var(--r);font-family:var(--fd);font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:var(--tr);width:100%}
+.btn-buy:hover:not(:disabled){background:var(--rojo-dark);box-shadow:var(--shr);transform:translateY(-1px)}
+.btn-buy:disabled{background:var(--n5);color:var(--gris);cursor:not-allowed}
+
+/* SIN RESULTADOS */
+.no-res{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--gris)}
+.no-icon{font-size:60px;margin-bottom:14px}
+.no-res h3{font-family:var(--fd);font-size:22px;color:#fff}
+.no-res p{margin-top:7px;font-size:14px}
+
+/* FOOTER */
+footer{background:var(--n2);border-top:2px solid var(--rojo);padding:40px 20px;margin-top:56px;text-align:center}
+.ft-brand{font-family:var(--fd);font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase}
+.ft-brand span{color:var(--rojo)}
+.ft-wa{display:inline-flex;align-items:center;gap:9px;margin:22px 0;padding:13px 26px;background:#25d366;color:#fff;text-decoration:none;border-radius:var(--r);font-family:var(--fd);font-weight:700;font-size:16px;letter-spacing:1px;transition:var(--tr)}
+.ft-wa:hover{background:#1ebe59;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.ft-copy{color:var(--gris);font-size:13px;margin-top:6px}
+
+/* SCROLL TOP */
+#scroll-top{position:fixed;bottom:26px;right:26px;width:44px;height:44px;background:var(--rojo);color:#fff;border:none;border-radius:var(--r);font-size:20px;cursor:pointer;transition:var(--tr);opacity:0;visibility:hidden;z-index:200;box-shadow:var(--shr)}
+#scroll-top.vis{opacity:1;visibility:visible}
+#scroll-top:hover{background:var(--rojo-dark);transform:translateY(-2px)}
+
+/* ANIMACIONES */
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .h-inner{height:auto;padding:12px 14px;flex-wrap:wrap}
+  .h-wa span{display:none}.h-wa{padding:10px 13px}
+  .hero{padding:38px 16px}
+  .main-wrap{padding:20px 14px}
+  #promo-section{padding:20px 14px}
+  .promo-hdr{flex-direction:column}
+  .prod-grid,.promo-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:11px}
+  #promo-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:11px}
+  .cat-title{font-size:18px}
+  #cat-nav{gap:6px;padding:12px}
+  .cat-btn{font-size:12px;padding:6px 11px}
+}
+@media(max-width:460px){
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .prod-info{padding:11px;gap:6px}
+  .prod-nombre{font-size:13px}
+  .p-act{font-size:18px}
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     HEADER
-══════════════════════════════════════ -->
+<!-- ═══ HEADER ═══ -->
 <header>
-  <div class="header-inner">
-
-    <!-- LOGO -->
-    <a href="#" class="logo-wrap">
-      <img id="store-logo" src="images/logo.png" alt="Logo" />
-      <div id="logo-text">T</div>
-      <div class="logo-info">
-        <span id="store-name">TechStore</span>
-        <span id="store-slogan">Tu tienda de tecnología</span>
-      </div>
-    </a>
-
-    <!-- BUSCADOR -->
-    <div class="header-search">
-      <span class="search-icon">🔍</span>
-      <input
-        type="search"
-        id="buscador"
-        placeholder="Buscar productos, categorías..."
-        autocomplete="off"
-      />
+<div class="h-inner">
+  <a href="#" class="logo-wrap">
+    <img id="store-logo" src="logo.png" alt="Logo"/>
+    <div id="logo-text">T</div>
+    <div class="logo-info">
+      <span id="store-name">TechStore</span>
+      <span id="store-slogan">Tu tienda de tecnología</span>
     </div>
-
-    <!-- WHATSAPP HEADER -->
-    <a href="https://wa.link/lunypx" target="_blank" rel="noopener" class="header-whatsapp">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.85L.057 23.547a.75.75 0 0 0 .898.898l5.697-1.465A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.662-.497-5.193-1.369l-.372-.214-3.844.989 1.006-3.741-.228-.378A9.96 9.96 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-      </svg>
-      <span>WhatsApp</span>
-    </a>
-
+  </a>
+  <div class="h-search">
+    <span class="s-icon">🔍</span>
+    <input type="search" id="buscador" placeholder="Buscar productos, categorías..." autocomplete="off"/>
   </div>
+  <a href="https://wa.link/lunypx" target="_blank" rel="noopener" class="h-wa">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.85L.057 23.547a.75.75 0 0 0 .898.898l5.697-1.465A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.662-.497-5.193-1.369l-.372-.214-3.844.989 1.006-3.741-.228-.378A9.96 9.96 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+</div>
 </header>
 
-<!-- ══════════════════════════════════════
-     STATS BAR
-══════════════════════════════════════ -->
+<!-- ═══ STATS ═══ -->
 <div id="stats-bar"></div>
 
-<!-- ══════════════════════════════════════
-     HERO
-══════════════════════════════════════ -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-content">
-    <h1>Tech<span>Store</span></h1>
-    <p>Todo en tecnología — calidad garantizada al mejor precio</p>
-    <div class="hero-tags">
-      <span class="hero-tag">🖥️ Procesadores</span>
-      <span class="hero-tag">📹 CCTV</span>
-      <span class="hero-tag">⌨️ Periféricos</span>
-      <span class="hero-tag">💾 Almacenamiento</span>
-      <span class="hero-tag">🔌 Adaptadores</span>
-      <span class="hero-tag">🎧 Audio</span>
-    </div>
+<div class="hero-c">
+  <h1>Tech<span>Store</span></h1>
+  <p>Todo en tecnología — calidad garantizada al mejor precio</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🖥️ Procesadores</span>
+    <span class="hero-tag">📹 CCTV</span>
+    <span class="hero-tag">⌨️ Periféricos</span>
+    <span class="hero-tag">💾 Almacenamiento</span>
+    <span class="hero-tag">🔌 Adaptadores</span>
+    <span class="hero-tag">🎧 Audio</span>
   </div>
+</div>
 </section>
 
-<!-- ══════════════════════════════════════
-     MAIN CONTENT
-══════════════════════════════════════ -->
+<!-- ═══ MAIN ═══ -->
 <main class="main-wrap">
 
-  <!-- SECCIÓN PROMOCIONES -->
-  <section id="promociones-section">
-    <div class="promo-header">
-      <div class="promo-titles">
+  <!-- PROMOCIONES -->
+  <section id="promo-section">
+    <div class="promo-hdr">
+      <div>
         <h2 id="promo-titulo">🔥 OFERTAS FLASH</h2>
-        <p id="promo-subtitulo">Precios especiales por tiempo limitado</p>
+        <p id="promo-sub">Precios especiales por tiempo limitado</p>
       </div>
-
-      <div id="countdown-container">
-        <span class="countdown-label">Termina en:</span>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-dias">00</span>
-          <span class="cd-label">días</span>
-        </div>
+      <div id="countdown">
+        <span class="cd-lbl">Termina en:</span>
+        <div class="cd-blk"><span class="cd-num" id="cd-d">00</span><span class="cd-u">días</span></div>
         <span class="cd-sep">:</span>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-horas">00</span>
-          <span class="cd-label">horas</span>
-        </div>
+        <div class="cd-blk"><span class="cd-num" id="cd-h">00</span><span class="cd-u">horas</span></div>
         <span class="cd-sep">:</span>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-minutos">00</span>
-          <span class="cd-label">min</span>
-        </div>
+        <div class="cd-blk"><span class="cd-num" id="cd-m">00</span><span class="cd-u">min</span></div>
         <span class="cd-sep">:</span>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-segundos">00</span>
-          <span class="cd-label">seg</span>
-        </div>
+        <div class="cd-blk"><span class="cd-num" id="cd-s">00</span><span class="cd-u">seg</span></div>
       </div>
     </div>
-
     <div id="promo-grid"></div>
   </section>
 
-  <!-- NAVEGACIÓN DE CATEGORÍAS -->
-  <nav id="categorias-nav" aria-label="Filtrar por categoría"></nav>
+  <!-- NAV CATEGORÍAS -->
+  <nav id="cat-nav"></nav>
 
-  <!-- PRODUCTOS POR CATEGORÍA -->
-  <div id="productos-container"></div>
+  <!-- PRODUCTOS -->
+  <div id="prod-container"></div>
 
 </main>
 
-<!-- ══════════════════════════════════════
-     FOOTER
-══════════════════════════════════════ -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">Tech<span>Store</span></div>
-    <p style="color: var(--gris); margin-top: 8px; font-size: 14px;">
-      Tecnología de calidad — Servicio personalizado
-    </p>
-    <a href="https://wa.link/lunypx" target="_blank" rel="noopener" class="footer-whatsapp">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.85L.057 23.547a.75.75 0 0 0 .898.898l5.697-1.465A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.662-.497-5.193-1.369l-.372-.214-3.844.989 1.006-3.741-.228-.378A9.96 9.96 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-      </svg>
-      Contáctanos por WhatsApp
-    </a>
-    <p class="footer-copy">© 2025 TechStore — Todos los derechos reservados</p>
-  </div>
+  <div class="ft-brand">Tech<span>Store</span></div>
+  <p style="color:var(--gris);margin-top:8px;font-size:14px">Tecnología de calidad — Servicio personalizado</p>
+  <a href="https://wa.link/lunypx" target="_blank" rel="noopener" class="ft-wa">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.85L.057 23.547a.75.75 0 0 0 .898.898l5.697-1.465A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.662-.497-5.193-1.369l-.372-.214-3.844.989 1.006-3.741-.228-.378A9.96 9.96 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+    Contáctanos por WhatsApp
+  </a>
+  <p class="ft-copy">© 2025 TechStore — Todos los derechos reservados</p>
 </footer>
 
-<!-- SCROLL TOP -->
 <button id="scroll-top" aria-label="Volver arriba">↑</button>
 
-<!-- SCRIPTS -->
-<script src="js/productos.js"></script>
-<script src="js/app.js"></script>
+<!-- ═══════════════════════════════════════════════════════════
+     ⭐ CONFIGURACIÓN DE LA TIENDA — EDITA AQUÍ
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+// ============================================================
+// WHATSAPP — cambia el link si cambia tu número
+// ============================================================
+const WA = "https://wa.link/lunypx";
 
+// ============================================================
+// INFO DE LA TIENDA
+// ============================================================
+const TIENDA = {
+  nombre: "TechStore",
+  slogan: "Tu tienda de tecnología",
+  logo: "logo.png",   // sube tu logo como "logo.png" al repositorio
+};
+
+// ============================================================
+// PROMOCIÓN POR TIEMPO LIMITADO
+// Cambia fechaFin al formato: "AAAA-MM-DDTHH:MM:SS"
+// activa: false  →  oculta la sección completamente
+// ============================================================
+const PROMO = {
+  activa: true,
+  titulo: "🔥 OFERTAS FLASH",
+  subtitulo: "Precios especiales por tiempo limitado",
+  fechaFin: "2025-08-01T23:59:59",
+};
+
+// ============================================================
+// CATEGORÍAS
+// Para agregar una nueva: descomenta un slot y renómbralo
+// La clave debe coincidir con "categoria" en los productos
+// ============================================================
+const CATEGORIAS = {
+  procesadores:        "Procesadores",
+  teclados:            "Teclados",
+  impresoras:          "Impresoras",
+  mouse:               "Mouse",
+  audifonos:           "Audífonos",
+  camaras_cctv:        "Cámaras CCTV",
+  dvr:                 "DVR",
+  webcam:              "Webcam",
+  almacenamiento_cctv: "Almacenamiento CCTV",
+  almacenamiento:      "Almacenamiento",
+  suministros:         "Suministros",
+  adaptadores:         "Adaptadores",
+  // ── 20 SLOTS ADICIONALES ──────────────────────────────────
+  // slot1:  "Monitores",
+  // slot2:  "Gabinetes",
+  // slot3:  "Fuentes de poder",
+  // slot4:  "Tarjetas de video",
+  // slot5:  "Placas madre",
+  // slot6:  "Refrigeración",
+  // slot7:  "Cables",
+  // slot8:  "Tablets",
+  // slot9:  "Celulares",
+  // slot10: "Accesorios móvil",
+  // slot11: "Smart TV",
+  // slot12: "Proyectores",
+  // slot13: "Energía",
+  // slot14: "Redes",
+  // slot15: "Servidores",
+  // slot16: "Software",
+  // slot17: "Sillas gaming",
+  // slot18: "Escritorios",
+  // slot19: "Iluminación",
+  // slot20: "Otros",
+};
+
+// ============================================================
+// ⭐ LISTA DE PRODUCTOS
+// ─────────────────────────────────────────────────────────────
+// Campos:
+//   id            → único, no repetir  (ej: "proc-001")
+//   nombre        → nombre completo del producto
+//   categoria     → clave de CATEGORIAS arriba
+//   precio        → precio actual  (ej: 99.99)
+//   precioOriginal→ precio antes del descuento, o null
+//   stock         → unidades disponibles (0 = agotado)
+//   imagen        → URL o ruta  (ej: "images/producto.jpg")
+//   descripcion   → texto corto
+//   promocion     → true = aparece en Ofertas Flash
+// ─────────────────────────────────────────────────────────────
+// Para AÑADIR: copia un bloque { ... }, y pégalo en la categoría
+// Para ELIMINAR: borra el bloque completo
+// ============================================================
+const PRODUCTOS = [
+
+  // ── PROCESADORES ──────────────────────────────────────────
+  { id:"proc-001", nombre:"Intel Core i9-14900K",      categoria:"procesadores",  precio:589.99, precioOriginal:649.99, stock:5,  imagen:"https://placehold.co/400x300/111/E8000D?text=Intel+i9",     descripcion:"24 núcleos, hasta 6.0GHz, Socket LGA1700",           promocion:true  },
+  { id:"proc-002", nombre:"AMD Ryzen 9 7950X",          categoria:"procesadores",  precio:549.99, precioOriginal:null,   stock:3,  imagen:"https://placehold.co/400x300/111/E8000D?text=Ryzen+9",      descripcion:"16 núcleos, hasta 5.7GHz, Socket AM5",               promocion:false },
+  { id:"proc-003", nombre:"Intel Core i5-14600K",       categoria:"procesadores",  precio:289.99, precioOriginal:null,   stock:12, imagen:"https://placehold.co/400x300/111/E8000D?text=Intel+i5",     descripcion:"14 núcleos, hasta 5.3GHz, Socket LGA1700",           promocion:false },
+  { id:"proc-004", nombre:"AMD Ryzen 5 7600X",          categoria:"procesadores",  precio:219.99, precioOriginal:259.99, stock:8,  imagen:"https://placehold.co/400x300/111/E8000D?text=Ryzen+5",      descripcion:"6 núcleos, hasta 5.3GHz, Socket AM5",                promocion:true  },
+  { id:"proc-005", nombre:"Intel Core i3-14100",        categoria:"procesadores",  precio:129.99, precioOriginal:null,   stock:20, imagen:"https://placehold.co/400x300/111/E8000D?text=Intel+i3",     descripcion:"4 núcleos, hasta 4.7GHz, Socket LGA1700",            promocion:false },
+
+  // ── TECLADOS ──────────────────────────────────────────────
+  { id:"tec-001", nombre:"Redragon K552 Mecánico RGB",  categoria:"teclados",      precio:49.99,  precioOriginal:69.99,  stock:15, imagen:"https://placehold.co/400x300/111/E8000D?text=Redragon+K552",descripcion:"Switches mecánicos azules, retroiluminación RGB",     promocion:true  },
+  { id:"tec-002", nombre:"Logitech K800 Inalámbrico",   categoria:"teclados",      precio:79.99,  precioOriginal:null,   stock:7,  imagen:"https://placehold.co/400x300/111/E8000D?text=Logitech+K800",descripcion:"Inalámbrico, teclas iluminadas, recargable",          promocion:false },
+  { id:"tec-003", nombre:"HyperX Alloy Origins Core",   categoria:"teclados",      precio:109.99, precioOriginal:null,   stock:4,  imagen:"https://placehold.co/400x300/111/E8000D?text=HyperX+Alloy", descripcion:"Tenkeyless, switches HyperX Red, aluminio",           promocion:false },
+  { id:"tec-004", nombre:"HP K1000 Membrana USB",       categoria:"teclados",      precio:19.99,  precioOriginal:null,   stock:30, imagen:"https://placehold.co/400x300/111/E8000D?text=HP+K1000",     descripcion:"USB, diseño silencioso, resistente al agua",          promocion:false },
+
+  // ── IMPRESORAS ────────────────────────────────────────────
+  { id:"imp-001", nombre:"HP LaserJet Pro M404n",       categoria:"impresoras",    precio:299.99, precioOriginal:349.99, stock:3,  imagen:"https://placehold.co/400x300/111/E8000D?text=HP+LaserJet",  descripcion:"Láser monocromática, 38 ppm, USB y Ethernet",         promocion:true  },
+  { id:"imp-002", nombre:"Epson EcoTank L3250",         categoria:"impresoras",    precio:199.99, precioOriginal:null,   stock:6,  imagen:"https://placehold.co/400x300/111/E8000D?text=Epson+L3250",  descripcion:"Tinta continua, WiFi, imprime/escanea/copia",         promocion:false },
+  { id:"imp-003", nombre:"Canon PIXMA MG3620",          categoria:"impresoras",    precio:89.99,  precioOriginal:null,   stock:9,  imagen:"https://placehold.co/400x300/111/E8000D?text=Canon+PIXMA",  descripcion:"Inyección de tinta, WiFi, imprime/copia/escanea",     promocion:false },
+
+  // ── MOUSE ─────────────────────────────────────────────────
+  { id:"mou-001", nombre:"Logitech G502 Hero Gaming",   categoria:"mouse",         precio:49.99,  precioOriginal:79.99,  stock:18, imagen:"https://placehold.co/400x300/111/E8000D?text=G502+Hero",    descripcion:"25K DPI, 11 botones programables, RGB",               promocion:true  },
+  { id:"mou-002", nombre:"Rapoo MT750S Inalámbrico",    categoria:"mouse",         precio:39.99,  precioOriginal:null,   stock:11, imagen:"https://placehold.co/400x300/111/E8000D?text=Rapoo+MT750",  descripcion:"Multi-device Bluetooth, 3200 DPI, recargable",        promocion:false },
+  { id:"mou-003", nombre:"Redragon M711 Cobra RGB",     categoria:"mouse",         precio:24.99,  precioOriginal:null,   stock:25, imagen:"https://placehold.co/400x300/111/E8000D?text=M711+Cobra",   descripcion:"10000 DPI, RGB, 7 botones programables",              promocion:false },
+  { id:"mou-004", nombre:"HP X500 USB",                 categoria:"mouse",         precio:12.99,  precioOriginal:null,   stock:40, imagen:"https://placehold.co/400x300/111/E8000D?text=HP+X500",      descripcion:"USB, 1000 DPI, ergonómico",                           promocion:false },
+
+  // ── AUDÍFONOS ─────────────────────────────────────────────
+  { id:"aud-001", nombre:"HyperX Cloud Alpha Gaming",   categoria:"audifonos",     precio:89.99,  precioOriginal:119.99, stock:7,  imagen:"https://placehold.co/400x300/111/E8000D?text=Cloud+Alpha",  descripcion:"Drivers duales, micrófono desmontable, sonido 3D",    promocion:true  },
+  { id:"aud-002", nombre:"JBL Tune 510BT Bluetooth",    categoria:"audifonos",     precio:44.99,  precioOriginal:null,   stock:14, imagen:"https://placehold.co/400x300/111/E8000D?text=JBL+510BT",    descripcion:"40h batería, carga rápida, plegables",                promocion:false },
+  { id:"aud-003", nombre:"Sony WH-1000XM5 ANC",         categoria:"audifonos",     precio:279.99, precioOriginal:349.99, stock:2,  imagen:"https://placehold.co/400x300/111/E8000D?text=Sony+WH1000",  descripcion:"Cancelación de ruido líder, 30h, LDAC",               promocion:true  },
+
+  // ── CÁMARAS CCTV ──────────────────────────────────────────
+  { id:"cam-001", nombre:"Dahua IPC-HDW2831T-AS 4K",    categoria:"camaras_cctv",  precio:69.99,  precioOriginal:89.99,  stock:10, imagen:"https://placehold.co/400x300/111/E8000D?text=Dahua+4K+IP",  descripcion:"8MP 4K, visión nocturna 30m, H.265+",                 promocion:true  },
+  { id:"cam-002", nombre:"Hikvision DS-2CD1123G0 Domo", categoria:"camaras_cctv",  precio:59.99,  precioOriginal:null,   stock:8,  imagen:"https://placehold.co/400x300/111/E8000D?text=Hik+Domo",     descripcion:"2MP Full HD, IP67, visión nocturna 30m",              promocion:false },
+  { id:"cam-003", nombre:"Reolink RLC-810A Bullet PoE", categoria:"camaras_cctv",  precio:79.99,  precioOriginal:null,   stock:5,  imagen:"https://placehold.co/400x300/111/E8000D?text=Reolink+810A", descripcion:"4K PoE, detección personas/vehículos, sin mensualidad",promocion:false },
+  { id:"cam-004", nombre:"Hikvision DS-2DE4425 PTZ",    categoria:"camaras_cctv",  precio:199.99, precioOriginal:null,   stock:2,  imagen:"https://placehold.co/400x300/111/E8000D?text=Hik+PTZ",      descripcion:"4MP, zoom óptico 25x, seguimiento automático",        promocion:false },
+
+  // ── DVR / NVR ─────────────────────────────────────────────
+  { id:"dvr-001", nombre:"Hikvision DS-7208HQHI-K1 DVR",categoria:"dvr",           precio:129.99, precioOriginal:159.99, stock:4,  imagen:"https://placehold.co/400x300/111/E8000D?text=DVR+8ch",      descripcion:"8 canales TurboHD, 1080p, H.265+",                    promocion:true  },
+  { id:"dvr-002", nombre:"Dahua NVR2108HS-8P-I PoE",    categoria:"dvr",           precio:179.99, precioOriginal:null,   stock:3,  imagen:"https://placehold.co/400x300/111/E8000D?text=NVR+PoE",      descripcion:"8 canales IP PoE, hasta 8MP, H.265",                  promocion:false },
+  { id:"dvr-003", nombre:"Reolink RLN8-410 NVR 8ch",    categoria:"dvr",           precio:99.99,  precioOriginal:null,   stock:6,  imagen:"https://placehold.co/400x300/111/E8000D?text=NVR+Reolink",  descripcion:"8 canales PoE, 4K, sin suscripción",                  promocion:false },
+
+  // ── WEBCAM ────────────────────────────────────────────────
+  { id:"web-001", nombre:"Logitech C920s Pro HD",       categoria:"webcam",        precio:69.99,  precioOriginal:89.99,  stock:12, imagen:"https://placehold.co/400x300/111/E8000D?text=C920s+Pro",    descripcion:"1080p 30fps, micrófono estéreo, cubierta privacidad",  promocion:true  },
+  { id:"web-002", nombre:"Razer Kiyo X 1080p",          categoria:"webcam",        precio:59.99,  precioOriginal:null,   stock:9,  imagen:"https://placehold.co/400x300/111/E8000D?text=Razer+Kiyo",   descripcion:"Full HD, compatible OBS/Streamlabs, sin driver",      promocion:false },
+  { id:"web-003", nombre:"Anker PowerConf C200 2K",     categoria:"webcam",        precio:49.99,  precioOriginal:null,   stock:7,  imagen:"https://placehold.co/400x300/111/E8000D?text=Anker+C200",   descripcion:"2K, micrófono dual, corrección de luz AI",            promocion:false },
+
+  // ── ALMACENAMIENTO CCTV ───────────────────────────────────
+  { id:"alc-001", nombre:"Seagate SkyHawk 4TB CCTV",    categoria:"almacenamiento_cctv", precio:89.99,  precioOriginal:109.99, stock:8,  imagen:"https://placehold.co/400x300/111/E8000D?text=SkyHawk+4TB", descripcion:"Optimizado vigilancia 24/7, 64MB caché",             promocion:true  },
+  { id:"alc-002", nombre:"WD Purple 2TB Vigilancia",    categoria:"almacenamiento_cctv", precio:64.99,  precioOriginal:null,   stock:10, imagen:"https://placehold.co/400x300/111/E8000D?text=WD+Purple+2T",descripcion:"Vigilancia 24/7, AllFrame AI, hasta 64 cámaras",     promocion:false },
+  { id:"alc-003", nombre:"Seagate SkyHawk 8TB CCTV",    categoria:"almacenamiento_cctv", precio:179.99, precioOriginal:null,   stock:3,  imagen:"https://placehold.co/400x300/111/E8000D?text=SkyHawk+8TB", descripcion:"Alta capacidad DVR/NVR, workload 180TB/año",          promocion:false },
+
+  // ── ALMACENAMIENTO ────────────────────────────────────────
+  { id:"alm-001", nombre:"Samsung 990 Pro 1TB NVMe M.2",categoria:"almacenamiento", precio:99.99,  precioOriginal:129.99, stock:14, imagen:"https://placehold.co/400x300/111/E8000D?text=Samsung+990",  descripcion:"PCIe 4.0, lectura 7450MB/s, PS5 compatible",          promocion:true  },
+  { id:"alm-002", nombre:"Kingston A400 480GB SATA SSD",categoria:"almacenamiento", precio:44.99,  precioOriginal:null,   stock:22, imagen:"https://placehold.co/400x300/111/E8000D?text=Kingston+SSD", descripcion:"SATA III, lectura 500MB/s, 2.5 pulgadas",             promocion:false },
+  { id:"alm-003", nombre:"Kingston Fury 16GB DDR5-5600", categoria:"almacenamiento",precio:69.99,  precioOriginal:null,   stock:11, imagen:"https://placehold.co/400x300/111/E8000D?text=DDR5+16GB",    descripcion:"DDR5-5600, CL36, diseño bajo perfil",                 promocion:false },
+  { id:"alm-004", nombre:"SanDisk Ultra USB 3.0 128GB", categoria:"almacenamiento", precio:17.99,  precioOriginal:null,   stock:35, imagen:"https://placehold.co/400x300/111/E8000D?text=SanDisk+128G", descripcion:"USB 3.0, lectura 130MB/s, diseño retráctil",          promocion:false },
+
+  // ── SUMINISTROS ───────────────────────────────────────────
+  { id:"sum-001", nombre:"Cartucho HP 664 Negro Original",   categoria:"suministros",precio:14.99,  precioOriginal:null,   stock:50, imagen:"https://placehold.co/400x300/111/E8000D?text=HP+664+Negro", descripcion:"Original HP, 120 páginas, Deskjet 1115/2135",         promocion:false },
+  { id:"sum-002", nombre:"Tóner HP CF217A LaserJet Original",categoria:"suministros",precio:34.99,  precioOriginal:44.99,  stock:15, imagen:"https://placehold.co/400x300/111/E8000D?text=HP+Toner+17A",descripcion:"Original HP, 1600 páginas, M102/M130",                promocion:true  },
+  { id:"sum-003", nombre:"Tinta Epson T664 Pack 4 colores",  categoria:"suministros",precio:24.99,  precioOriginal:null,   stock:28, imagen:"https://placehold.co/400x300/111/E8000D?text=Epson+T664",  descripcion:"Pack CMYK, 500ml cada uno, L100/L200/L355",           promocion:false },
+  { id:"sum-004", nombre:"Cable HDMI 4K Premium 2 metros",   categoria:"suministros",precio:9.99,   precioOriginal:null,   stock:60, imagen:"https://placehold.co/400x300/111/E8000D?text=HDMI+4K+2m",  descripcion:"HDMI 2.0, 18Gbps, soporta 4K@60Hz y HDR",            promocion:false },
+
+  // ── ADAPTADORES ───────────────────────────────────────────
+  { id:"adp-001", nombre:"Anker Hub USB-C 7 en 1",       categoria:"adaptadores",   precio:39.99,  precioOriginal:54.99,  stock:16, imagen:"https://placehold.co/400x300/111/E8000D?text=Hub+USB-C+7",  descripcion:"PD 100W, HDMI 4K, 2xUSB-A 3.0, SD/microSD",         promocion:true  },
+  { id:"adp-002", nombre:"Adaptador DisplayPort a HDMI",  categoria:"adaptadores",   precio:12.99,  precioOriginal:null,   stock:20, imagen:"https://placehold.co/400x300/111/E8000D?text=DP+HDMI",      descripcion:"4K@60Hz, compatible AMD/Nvidia/Intel",                promocion:false },
+  { id:"adp-003", nombre:"USB 3.0 a Ethernet Gigabit",    categoria:"adaptadores",   precio:17.99,  precioOriginal:null,   stock:13, imagen:"https://placehold.co/400x300/111/E8000D?text=USB+Ethernet", descripcion:"1000Mbps, plug & play, Mac/Windows/Linux",            promocion:false },
+  { id:"adp-004", nombre:"Regleta Inteligente 6 tomas USB",categoria:"adaptadores",  precio:29.99,  precioOriginal:39.99,  stock:9,  imagen:"https://placehold.co/400x300/111/E8000D?text=Regleta+USB",  descripcion:"6 tomas AC + 4 USB, control individual, protección",  promocion:true  },
+
+  // ── SLOTS ADICIONALES (descomenta para usar) ───────────────
+  // { id:"s1-001", nombre:"Nombre producto", categoria:"slot1", precio:0.00, precioOriginal:null, stock:0, imagen:"https://placehold.co/400x300/111/E8000D?text=Producto", descripcion:"Descripción", promocion:false },
+
+]; // ← FIN DE PRODUCTOS
+
+// ═══════════════════════════════════════════════════════════
+// LÓGICA — NO EDITAR DESDE AQUÍ
+// ═══════════════════════════════════════════════════════════
+(function(){
+  // Logo
+  const logo = document.getElementById("store-logo");
+  const logoTxt = document.getElementById("logo-text");
+  logo.src = TIENDA.logo;
+  logo.onload = () => { logo.style.display = "block"; logoTxt.style.display = "none"; };
+  logo.onerror = () => { logo.style.display = "none"; logoTxt.style.display = "flex"; };
+  document.getElementById("store-name").textContent = TIENDA.nombre;
+  document.getElementById("store-slogan").textContent = TIENDA.slogan;
+  document.title = TIENDA.nombre;
+
+  // ICONS
+  const ICONS = {procesadores:"🖥️",teclados:"⌨️",impresoras:"🖨️",mouse:"🖱️",audifonos:"🎧",camaras_cctv:"📹",dvr:"📼",webcam:"📷",almacenamiento_cctv:"💾",almacenamiento:"💽",suministros:"🗄️",adaptadores:"🔌"};
+  const icon = k => ICONS[k]||"📦";
+
+  // STATS
+  const stats = document.getElementById("stats-bar");
+  const cats = new Set(PRODUCTOS.map(p=>p.categoria)).size;
+  stats.innerHTML = `<span>📦 ${PRODUCTOS.length} productos</span><span>✅ ${PRODUCTOS.filter(p=>p.stock>0).length} disponibles</span><span>📂 ${cats} categorías</span>`;
+
+  // COUNTDOWN
+  if(PROMO.activa){
+    document.getElementById("promo-titulo").textContent = PROMO.titulo;
+    document.getElementById("promo-sub").textContent = PROMO.subtitulo;
+    const fin = new Date(PROMO.fechaFin);
+    const tick = () => {
+      const d = fin - new Date();
+      if(d<=0){document.getElementById("countdown").innerHTML='<span style="color:var(--gris);font-style:italic">Promoción finalizada</span>';return;}
+      document.getElementById("cd-d").textContent = String(Math.floor(d/86400000)).padStart(2,"0");
+      document.getElementById("cd-h").textContent = String(Math.floor(d%86400000/3600000)).padStart(2,"0");
+      document.getElementById("cd-m").textContent = String(Math.floor(d%3600000/60000)).padStart(2,"0");
+      document.getElementById("cd-s").textContent = String(Math.floor(d%60000/1000)).padStart(2,"0");
+    };
+    tick(); setInterval(tick,1000);
+    // Promos grid
+    const pg = document.getElementById("promo-grid");
+    const promos = PRODUCTOS.filter(p=>p.promocion&&p.stock>0);
+    pg.innerHTML = promos.map(p=>card(p,true)).join("");
+    bindBuy(pg);
+  } else {
+    document.getElementById("promo-section").style.display="none";
+  }
+
+  // CATEGORÍAS NAV
+  const nav = document.getElementById("cat-nav");
+  const catActivas = Object.entries(CATEGORIAS).filter(([k])=>PRODUCTOS.some(p=>p.categoria===k));
+  nav.innerHTML = `<button class="cat-btn active" onclick="filtrar('all',this)"><span>⚡</span> Todos</button>`
+    + catActivas.map(([k,n])=>`<button class="cat-btn" onclick="filtrar('${k}',this)"><span>${icon(k)}</span> ${n} <span class="cat-cnt">${PRODUCTOS.filter(p=>p.categoria===k).length}</span></button>`).join("");
+
+  // PRODUCTOS POR CATEGORÍA
+  const cont = document.getElementById("prod-container");
+  cont.innerHTML = catActivas.map(([k,n])=>`
+    <section class="cat-sec" id="cs-${k}" data-cat="${k}">
+      <div class="cat-hdr">
+        <h2 class="cat-title">${icon(k)} ${n} <span class="cat-total">${PRODUCTOS.filter(p=>p.categoria===k).length} productos</span></h2>
+        <div class="cat-line"></div>
+      </div>
+      <div class="prod-grid">${PRODUCTOS.filter(p=>p.categoria===k).map(p=>card(p)).join("")}</div>
+    </section>`).join("");
+  bindBuy(cont);
+
+  // BUSCADOR
+  document.getElementById("buscador").addEventListener("input",function(){
+    const q = this.value.toLowerCase().trim();
+    if(!q){cont.innerHTML=""; catActivas.forEach(([k,n])=>{
+      const sec=document.createElement("section");
+      sec.className="cat-sec";sec.id=`cs-${k}`;sec.dataset.cat=k;
+      sec.innerHTML=`<div class="cat-hdr"><h2 class="cat-title">${icon(k)} ${n} <span class="cat-total">${PRODUCTOS.filter(p=>p.categoria===k).length} productos</span></h2><div class="cat-line"></div></div><div class="prod-grid">${PRODUCTOS.filter(p=>p.categoria===k).map(p=>card(p)).join("")}</div>`;
+      cont.appendChild(sec);
+    });bindBuy(cont);return;}
+    const res=PRODUCTOS.filter(p=>p.nombre.toLowerCase().includes(q)||p.descripcion.toLowerCase().includes(q)||(CATEGORIAS[p.categoria]||"").toLowerCase().includes(q));
+    cont.innerHTML = res.length?`<section class="cat-sec"><div class="cat-hdr"><h2 class="cat-title">🔍 "${q}" — ${res.length} resultado${res.length!==1?"s":""}</h2><div class="cat-line"></div></div><div class="prod-grid">${res.map(p=>card(p)).join("")}</div></section>`:`<div class="no-res"><div class="no-icon">🔍</div><h3>Sin resultados para "${q}"</h3><p>Intenta con otro término</p></div>`;
+    bindBuy(cont);
+  });
+
+  // SCROLL TOP
+  const st=document.getElementById("scroll-top");
+  window.addEventListener("scroll",()=>st.classList.toggle("vis",scrollY>400));
+  st.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+
+  // HELPERS
+  function card(p,enPromo=false){
+    const desc = p.precioOriginal?Math.round((1-p.precio/p.precioOriginal)*100):null;
+    let stockHtml;
+    if(p.stock===0) stockHtml=`<span class="stock out">❌ Agotado</span>`;
+    else if(p.stock<=5) stockHtml=`<span class="stock low">⚠️ Solo ${p.stock} en stock</span>`;
+    else stockHtml=`<span class="stock ok">✅ ${p.stock} disponibles</span>`;
+    return `<div class="prod-card${p.stock===0?" agotado":""}${enPromo?" promo":""}">
+      ${desc?`<div class="badge-desc">-${desc}%</div>`:""}
+      ${p.promocion?`<div class="badge-promo">🔥 OFERTA</div>`:""}
+      <div class="img-wrap"><img class="prod-img" src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x300/111/333?text=Sin+Imagen'"/></div>
+      <div class="prod-info">
+        <h3 class="prod-nombre">${p.nombre}</h3>
+        <p class="prod-desc">${p.descripcion}</p>
+        <div class="prod-precios">${p.precioOriginal?`<span class="p-orig">$${p.precioOriginal.toFixed(2)}</span>`:""}<span class="p-act">$${p.precio.toFixed(2)}</span></div>
+        ${stockHtml}
+        <button class="btn-buy" data-n="${encodeURIComponent(p.nombre)}" data-p="${p.precio}" ${p.stock===0?"disabled":""}>
+          ${p.stock===0?"Sin stock":"🛒 Comprar"}
+        </button>
+      </div></div>`;
+  }
+
+  function bindBuy(el){
+    el.querySelectorAll(".btn-buy:not(:disabled)").forEach(b=>{
+      b.onclick=()=>window.open(`${WA}?text=${encodeURIComponent(`Hola! Me interesa: *${decodeURIComponent(b.dataset.n)}* - Precio: $${Number(b.dataset.p).toFixed(2)}. ¿Está disponible?`)}`, "_blank");
+    });
+  }
+
+  window.filtrar = function(cat,btn){
+    document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelectorAll(".cat-sec").forEach(s=>{
+      s.style.display=(cat==="all"||s.dataset.cat===cat)?"":"none";
+    });
+    if(cat!=="all"){const t=document.getElementById(`cs-${cat}`);if(t)t.scrollIntoView({behavior:"smooth",block:"start"});}
+  };
+})();
+</script>
 </body>
 </html>
